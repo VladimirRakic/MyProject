@@ -1,0 +1,237 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B21A2C11-AF76-4B23-813E-2290B9372F5F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test_Aplikacija</RootNamespace>
+    <AssemblyName>Test_Aplikacija</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EDIt\css\dx.common.css" />
+    <Content Include="EDIt\css\dx.light.css" />
+    <Content Include="EDIt\css\styles.css" />
+    <Content Include="EDIt\images\icons\Jovan.png" />
+    <Content Include="EDIt\images\icons\Petar.png" />
+    <Content Include="EDIt\images\icons\Ilija.png" />
+    <Content Include="EDIt\images\logo.png" />
+    <Content Include="EDIt\images\pozadina.jpg" />
+    <Content Include="EDIt\index.html" />
+    <Content Include="EDIt\script\lib\dx.all.js" />
+    <Content Include="EDIt\script\lib\knockout-3.4.2.js" />
+    <Content Include="EDIt\script\lib\knockout-3.5.1.js" />
+    <Content Include="EDIt\text\emp.txt" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EDIt\.git\COMMIT_EDITMSG" />
+    <Content Include="EDIt\.git\config" />
+    <Content Include="EDIt\.git\description" />
+    <Content Include="EDIt\.git\HEAD" />
+    <Content Include="EDIt\.git\hooks\applypatch-msg.sample" />
+    <Content Include="EDIt\.git\hooks\commit-msg.sample" />
+    <Content Include="EDIt\.git\hooks\fsmonitor-watchman.sample" />
+    <Content Include="EDIt\.git\hooks\post-update.sample" />
+    <Content Include="EDIt\.git\hooks\pre-applypatch.sample" />
+    <Content Include="EDIt\.git\hooks\pre-commit.sample" />
+    <Content Include="EDIt\.git\hooks\pre-merge-commit.sample" />
+    <Content Include="EDIt\.git\hooks\pre-push.sample" />
+    <Content Include="EDIt\.git\hooks\pre-rebase.sample" />
+    <Content Include="EDIt\.git\hooks\pre-receive.sample" />
+    <Content Include="EDIt\.git\hooks\prepare-commit-msg.sample" />
+    <Content Include="EDIt\.git\hooks\update.sample" />
+    <Content Include="EDIt\.git\index" />
+    <Content Include="EDIt\.git\info\exclude" />
+    <Content Include="EDIt\.git\logs\HEAD" />
+    <Content Include="EDIt\.git\logs\refs\heads\master" />
+    <Content Include="EDIt\.git\objects\07\a399e2d916581bb69f6d2dd373ede5a226387f" />
+    <Content Include="EDIt\.git\objects\0c\a4aa2aeef284153fc83adaa94c5281fd27700b" />
+    <Content Include="EDIt\.git\objects\10\ce59f64d4c68dfa95b7bb5a6ba87687d3ad595" />
+    <Content Include="EDIt\.git\objects\14\5ac66f411d5a9154a3a6858e11ce1c24e0ebcf" />
+    <Content Include="EDIt\.git\objects\23\0069e308c50a575c096698f7856e88f73ce0dc" />
+    <Content Include="EDIt\.git\objects\27\68bee2d7e41a964ff022f11d5cdcd7f5c3acb2" />
+    <Content Include="EDIt\.git\objects\2e\9d3bc5ce511b8367d4b5d911a3f1971d223081" />
+    <Content Include="EDIt\.git\objects\2f\71d4b0b1d2e35ba997538dd224d7f1b8035636" />
+    <Content Include="EDIt\.git\objects\35\8e86d28df413fbbb577afaef6b37ca05793ddc" />
+    <Content Include="EDIt\.git\objects\3f\ccb3abbb07740aa0c3157de242b9175b7ee223" />
+    <Content Include="EDIt\.git\objects\40\2cf9e8b0f224297de1f4c8e95bc4ca581a9933" />
+    <Content Include="EDIt\.git\objects\44\d454dd38d0f97c5f2027b3e2547a797af9721b" />
+    <Content Include="EDIt\.git\objects\49\f3fe9ae8b2254a6991f1088be951721bec3565" />
+    <Content Include="EDIt\.git\objects\4d\9094b65ba56e20db5a8bf2f292ab8f1529b661" />
+    <Content Include="EDIt\.git\objects\50\34b595f1f4cc4fd69a6aa5ee3b72d5f0d31625" />
+    <Content Include="EDIt\.git\objects\51\f689e5de41a622e468e92d18ac6805b1a1e37f" />
+    <Content Include="EDIt\.git\objects\5d\c913c6ee56e3e5335fe161d67159f57d909090" />
+    <Content Include="EDIt\.git\objects\5e\ec0f8c793b6ac2c5b84a3ddbf7bfc2980602b7" />
+    <Content Include="EDIt\.git\objects\65\e8fc811ae9f598e1004817f83058309be3dc82" />
+    <Content Include="EDIt\.git\objects\6a\c6cd2f248d0e042cca4c72ea534559569d56cb" />
+    <Content Include="EDIt\.git\objects\72\18853b8d2831e423248ad3de1d4cc3f374b64f" />
+    <Content Include="EDIt\.git\objects\73\5d0d99aa2c7e5a1e69522bbf1b4ae899f74d53" />
+    <Content Include="EDIt\.git\objects\79\b509e54c088f5091b847f934dc1aff4b606108" />
+    <Content Include="EDIt\.git\objects\8a\905fff9e0778b6c05f097ea7110636f0b734d2" />
+    <Content Include="EDIt\.git\objects\8e\41d71cb80a1e5e0586987fb38d5791a55349c7" />
+    <Content Include="EDIt\.git\objects\8f\08f5eccec8e8cd0a400764f08a2a321f9cf62a" />
+    <Content Include="EDIt\.git\objects\95\a116a5ab6b64d561e9cd551c2bdbcca702c45a" />
+    <Content Include="EDIt\.git\objects\a0\8d509b59c09e5bc021e97566bb2f9306b24b70" />
+    <Content Include="EDIt\.git\objects\a2\61a3e981e39660c4bf754957f63545c54759b7" />
+    <Content Include="EDIt\.git\objects\a3\3837aaa3d601d324761b950239b44e1d7f1bd2" />
+    <Content Include="EDIt\.git\objects\a5\792d2984b8f9988412c0d849c187579cb541f9" />
+    <Content Include="EDIt\.git\objects\a7\2b2be7d213bfca3364c1310e4c7f9daaab12a0" />
+    <Content Include="EDIt\.git\objects\a9\a7b05feb4e325c5de0b55654871f04d99ecd5a" />
+    <Content Include="EDIt\.git\objects\ab\046e5387efbef63a61197f734ef15c18164b00" />
+    <Content Include="EDIt\.git\objects\af\6d02a51cdf2059d4584a1c83fc4044a2a7e55a" />
+    <Content Include="EDIt\.git\objects\af\ed1eee415e3e4b41d01b5abc033bb114588651" />
+    <Content Include="EDIt\.git\objects\b8\551d931a6892688d4af24198ae573cc25bc614" />
+    <Content Include="EDIt\.git\objects\be\027fcf23223b9d967cc538850ce80bb9f2f784" />
+    <Content Include="EDIt\.git\objects\c8\118c5a0f2d10dab0b921bcb612c322f27bc037" />
+    <Content Include="EDIt\.git\objects\cc\ad05e9379e4c0914688aa305ff2354d854ef72" />
+    <Content Include="EDIt\.git\objects\cd\076fa1cc59c8d2593c8bc3b556b32fb9dfbfd9" />
+    <Content Include="EDIt\.git\objects\cf\6725a3d955cbcc6bc8e37e7201b5c84015b8a1" />
+    <Content Include="EDIt\.git\objects\d1\dde6d7bcb553d98a623e1c099c500276437d1c" />
+    <Content Include="EDIt\.git\objects\d7\520e3b54ce44cf869248348861aa40a20bd365" />
+    <Content Include="EDIt\.git\objects\d7\a2f958658a985d67d690a140538cf411c664f1" />
+    <Content Include="EDIt\.git\objects\da\4a8ac6053a4a52ea3efe097c938597d1dac9e2" />
+    <Content Include="EDIt\.git\objects\e2\58e74f4e620858609aa4e3bc2a6bc087a94f55" />
+    <Content Include="EDIt\.git\objects\e6\7f22056cb5d1fbff6b13dd6d4bd6d1d5846149" />
+    <Content Include="EDIt\.git\objects\ef\3b10dc174e6c691dfe7de0500ad6ae198ac03a" />
+    <Content Include="EDIt\.git\objects\f8\c6476cd168a80b3c92f1a0e993897a8d7070b7" />
+    <Content Include="EDIt\.git\objects\fb\89a3e363de562f412b1bd5ab71f261dfe81422" />
+    <Content Include="EDIt\.git\ORIG_HEAD" />
+    <Content Include="EDIt\.git\refs\heads\master" />
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="EDIt\.git\branches\" />
+    <Folder Include="EDIt\.git\objects\info\" />
+    <Folder Include="EDIt\.git\objects\pack\" />
+    <Folder Include="EDIt\.git\refs\tags\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59797</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59797/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

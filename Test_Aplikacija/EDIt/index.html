@@ -1,0 +1,524 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="shortcut icon" href="http://localhost:59797/EDit/images/logo.png" />
+
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.1.0.min.js"></script>
+
+    <!-- Reference either Knockout or AngularJS, if you do -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+
+    <!-- DevExtreme themes -->
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.12/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/18.1.12/css/dx.light.css" />
+
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/18.1.12/js/dx.all.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+
+<body>
+    <div class="topBarLayout">
+        <div id="efront-top-left">
+            <img src="../EDit/images/logo.png">
+        </div>
+        <div class="topBarLayoutTabs">
+            <div id="tabs" data-bind="foreach: tabs">
+                <div class="tab"
+                     data-bind="css: {selected: $parent.selectedTab() == id}, text: name, click: $parent.selectedTab.bind($parent, id)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="form-overlay">
+            <!-- ko if: isInitialised() == true -->
+            <div class="wrapAllContent" data-bind="visible:isInitialised()" style="display: none">
+
+                <!-- ko if: selectedTab() == 1 -->
+                <h1> Welcome to home page!!!</h1><br><br>
+                <!-- /ko -->
+                <!-- ko if: selectedTab() == 2 -->
+                <div class="allContent">
+                    <div class="conteiner">
+                        <div class="firstconteiner">
+                            <div class="label1"> Select employee:</div>
+                            <div class="form-field-value">
+                                <div class="dxStyle" data-bind="dxSelectBox: employeeListTemplate()">
+                                    <div data-options="dxTemplate: { name: 'field' }">
+                                        <div class="custom-item">
+
+                                            <!--ko if: $data != null -->
+                                            <img id="imageShow" alt="Foo" data-bind="safeSrc: {src: 'images/icons/' + $data.image, fallback:'https://cdn5.vectorstock.com/i/1000x1000/96/89/man-icon-manager-symbol-in-flat-style-round-vector-9469689.jpg'}" />
+                                            <div class="lastName" data-bind="dxTextBox: {text: lastName, readOnly: true }"> </div>
+                                            <!-- /ko -->
+
+                                            <!--ko if: $data == null -->
+                                            <div class="lastName" data-bind="dxTextBox: {text: '', placeholder: 'Select..',readOnly: true }">
+                                            </div>
+                                            <!-- /ko -->
+
+                                        </div>
+                                    </div>
+
+                                    <div data-options="dxTemplate: { name: 'item' }">
+                                        <div class="custom-item-details">
+                                            <span data-bind="text:firstName"></span>
+                                            <span data-bind="text:lastName"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="buttonField">
+                                <button class="buttonAdd" data-bind="click:showInfoAndReset">Add user</button>
+                            </div>
+
+                            <popup-widget params="visiblePopup: visiblePopup, employeesList:employeesList "></popup-widget>
+
+                            <template id="popupTemplate">
+
+                                <div class="add-popup" data-bind="dxPopup: popupOptions">
+                                    <div data-options="dxTemplate: { name:'info' }">
+
+                                        <div class="popup-field">
+                                            <div class="popup-field-label">
+                                                First name:
+                                            </div>
+
+                                            <div class="popup-field-value">
+                                                <input type="text" class="inputFieldPop" data-bind="textInput:inputFirstName">
+                                                <!-- valueUpdate:'afterkeydown'- to je kao drugi nacin koji je manje efikasan ali radi , bolji sam nasao https://knockoutjs.com/documentation/textinput-binding.html   -->
+                                            </div>
+                                        </div>
+
+                                        <div class="popup-field">
+                                            <div class="popup-field-label">
+                                                Last name:
+                                            </div>
+
+                                            <div class="popup-field-value">
+                                                <input type="text" class="inputFieldPop" data-bind="textInput:inputLastName,">
+                                            </div>
+                                        </div>
+
+                                        <div class="popup-field">
+                                            <div class="popup-field-label">
+                                                Email:
+                                            </div>
+
+                                            <div class="popup-field-value">
+                                                <input type="text" class="inputFieldPop" data-bind="textInput:inputEmail">
+                                            </div>
+                                        </div>
+
+                                        <div class="popup-field">
+                                            <div class="popup-field-label">
+                                                Picture:
+                                            </div>
+
+                                            <div class="popup-field-value">
+                                                <input type="text" class="inputFieldPop" data-bind="textInput:inputImage">
+                                            </div>
+                                        </div>
+
+                                        <div class="field-button">
+                                            <button data-bind="click:addUserAndReset,enable:isAddEnabled">Save</button>
+                                            <button data-bind="click:closePopupAndReset">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </template>
+
+                        </div>
+                    </div>
+
+                    <div class="container2" data-bind="with:activeEmployee">
+                        <div class="infoUsers">
+                            <h3>  User information: <span data-bind="text:$root.ful"></span>  </h3>
+
+                            <!--ko if: $root.visibleSubmitEdit() == false -->
+                            <span>ID: </span><span data-bind="text: id"></span><br />
+                            <span>First name: </span><span data-bind="text: firstName"></span><br />
+                            <span>Last name: </span><span data-bind="text: lastName"></span><br />
+                            <span>Email: </span><span data-bind="text: email"></span><br /><br />
+                            <!-- /ko -->
+
+                            <!--ko if: $root.visibleSubmitEdit() == true -->
+                            <div class="edit-field">
+                                <div class="edit-field-label">
+                                    ID:
+                                </div>
+
+                                <div class="edit-field-value">
+                                    <input type="text" class="inputFieldEdit" data-bind="value:id" disabled>
+                                </div>
+                            </div>
+
+                            <div class="edit-field">
+                                <div class="edit-field-label">
+                                    First Name:
+                                </div>
+
+                                <div class="edit-field-value">
+                                    <input type="text" class="inputFieldEdit" data-bind="value:firstName">
+                                </div>
+                            </div>
+
+                            <div class="edit-field">
+                                <div class="edit-field-label">
+                                    Last Name:
+                                </div>
+
+                                <div class="edit-field-value">
+                                    <input type="text" class="inputFieldEdit" data-bind="value:lastName">
+                                </div>
+                            </div>
+
+                            <div class="edit-field">
+                                <div class="edit-field-label">
+                                    Email:
+                                </div>
+
+                                <div class="edit-field-value">
+                                    <input type="text" class="inputFieldEdit" data-bind="value:email">
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <br />
+                            <div class="buttonField">
+                                <button id="deleteButton" data-bind="confirmClick:{ message:'Are you sure', click: $root.deleteSelectedUser},visible:$parent.showDeleteButton">Delete user</button>
+                                <button data-bind=" visible:$root.showUpdatebutton,click:$root.hideDeleteUpdateShowSubmit">Update</button>
+                                <button data-bind=" visible:$root.visibleSubmitEdit,click:$root.updateUserAndGoBack">Submit changes</button>
+                                <button data-bind=" click:$root.goBack">Go back</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: selectedTab() == 3 -->
+                <h1> Some content on tab 3</h1><br><br>
+                <!-- /ko -->
+
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <script>
+
+        function EmployeesViewModel(data) {
+            var self = this;
+            self.isInitialised = ko.observable(false);
+            self.inputFirstName = ko.observable(null);
+            self.inputLastName = ko.observable(null);
+            self.inputEmail = ko.observable(null);
+            self.inputImage = ko.observable(null);
+
+            ko.components.register('popup-widget', {
+                viewModel: modelPopup,
+                template: { element: 'popupTemplate' }
+            });
+
+            // ovo sam ubacio novi binding za validaciju, za dugme Delete user ako neko slucajno pritisne dugme a nije zeleo da obrise user-a
+            ko.bindingHandlers.confirmClick = {
+                init: function (element, valueAccessor, allBindings, EmployeesViewModel) {
+                    var value = valueAccessor();
+                    var message = ko.unwrap(value.message);
+                    var click = value.click;
+                    ko.applyBindingsToNode(element, {
+                        click: function () {
+                            if (confirm(message))
+                                return click.apply(this, Array.prototype.slice.apply(arguments));
+                        }
+                    }, EmployeesViewModel);
+                }
+            }
+
+            function modelPopup(params) {
+                var that = this;
+                that.inputFirstName = ko.observable(null);
+                that.inputLastName = ko.observable(null);
+                that.inputEmail = ko.observable(null);
+                that.inputImage = ko.observable(null);
+                that.visiblePopup = params.visiblePopup;
+                that.employeesList = params.employeesList;
+
+                that.addUserAndReset = function () {
+                    var dataObject = { firstName: that.inputFirstName(), lastName: that.inputLastName(), email: that.inputEmail(), image: that.inputImage() };
+                    $.ajax({
+                        url: 'http://localhost:59797/api/Employee/insertObject',
+                        type: "POST",
+                        data: JSON.stringify(dataObject),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (response, textStatus, jqXHR) {
+                            dataObject.id = response;
+                            that.employeesList.push(dataObject)
+                            alert("Employee is succesfully added");
+                            that.inputFirstName(null);
+                            that.inputLastName(null);
+                            that.inputEmail(null);
+                            that.inputImage(null);
+                        },
+                        error: function (response) {
+                            console.log(response);
+                            alert(response.responseJSON.Message);
+                        }
+                    })
+                };
+
+                that.closePopupAndReset = function () {
+                    that.visiblePopup(false);
+                    that.inputFirstName(null);
+                    that.inputLastName(null);
+                    that.inputEmail(null);
+                    that.inputImage(null);
+                };
+
+                that.popupOptions = {
+                    width: 300,
+                    height: 250,
+                    contentTemplate: "info",
+                    showTitle: true,
+                    title: "Add user",
+                    visible: that.visiblePopup,
+                    dragEnabled: false,
+                    showCloseButton: true,
+                    onHiding: that.closePopupAndReset,
+                    closeOnOutsideClick: true
+                };
+
+                that.isAddEnabled = ko.pureComputed(function () {
+                    if (that.inputFirstName() && that.inputLastName() && that.inputEmail() && that.inputImage()) { return true; }
+                    else { return false; }
+                });
+            }
+
+            self.showDeleteButton = ko.observable(true);
+            self.visiblePopup = ko.observable(false);
+            self.visibleSubmitEdit = ko.observable(false);
+            self.initialStateEdit = ko.observable(false);
+            self.showUpdatebutton = ko.observable(true);
+            self.activeEmployee = ko.observable(null);
+
+            self.ful = ko.pureComputed(function () {
+                return self.activeEmployee().firstName + " " + self.activeEmployee().lastName;
+            });
+
+            self.employeesList = ko.observableArray([]);
+
+            self.employeesList.subscribe(function (newValue) {
+                self.isInitialised(true);
+            }, null, "arrayChange");
+
+
+            self.hideUpdate = function () {
+                self.showUpdatebutton(false);
+            }
+
+            self.showUpdate = function () {
+                self.showUpdatebutton(true);
+            }
+
+            self.hideDeleteUpdateShowSubmit = function () {
+                self.visibleSubmitEdit(true);
+                self.showDeleteButton(false);
+                self.showUpdatebutton(false);
+            }
+
+            self.showSubmitEdit = function () {
+                self.visibleSubmitEdit(true);
+            }
+            self.hideUpdate = function () {
+                self.showUpdatebutton(false);
+            }
+            self.hideDeleteButton = function () {
+                self.showDeleteButton(false);
+            };
+            // proverava postojanja slike u projektu za izabranog usera
+            ko.bindingHandlers.safeSrc = {
+                update: function (element, valueAccessor) {
+                    var options = valueAccessor();
+                    var src = ko.unwrap(options.src);
+                    $("#imageShow").attr('src', src).on('error', function () {
+                        $(element).attr('src', ko.unwrap(options.fallback));
+                    });
+                }
+            };
+
+            self.changToEditableContent = function () {
+                self.initialStateEdit(true);
+            }
+
+            self.reverEditableContent = function () {
+                self.initialStateEdit(false);
+            }
+
+            self.hideDeleteButton = function () {
+                self.showDeleteButton(false);
+            };
+
+            self.showDelete = function () {
+                self.showDeleteButton(true);
+            }
+
+            self.goBack = function () {
+                self.resetSlectedUser();
+                self.showDelete();
+            }
+
+            self.showInfo = function () {
+                self.visiblePopup(true);
+            };
+
+            self.resetSlectedUser = function () {
+                self.activeEmployee(null);
+            }
+
+            showInfoAndReset = function () {
+                self.visiblePopup(true);
+                self.activeEmployee(null);
+            }
+
+            self.closePopupAndReset = function () {
+                self.visiblePopup(false);
+                self.inputFirstName(null);
+                self.inputLastName(null);
+                self.inputEmail(null);
+                self.inputImage(null);
+            }
+
+           self.reset = function () {
+                self.inputFirstName(null);
+                self.inputLastName(null);
+                self.inputEmail(null);
+                self.inputImage(null);
+            }
+
+            self.deleteUser = function (user) {
+                var dft = $.Deferred();
+                $.ajax({
+                    url: 'http://localhost:59797/api/Employee/deleteObject' + "/" + user.id,
+                    type: 'DELETE',
+                    success: function () {
+                        dft.resolve();
+                    },
+                    error: function (err) {
+                        dft.reject(err);
+                    }
+                });
+                return dft.promise();
+            }
+
+            self.deleteSelectedUser = function (user) {
+                self.deleteUser(user).then(function () {
+                    $.getJSON("http://localhost:59797/Employees/getAll", function (data) {
+                        self.employeesList(data);
+                    });
+                    self.activeEmployee(null);
+                    alert("Employee is succesfully deleted")
+                }).catch(function (err) {
+                    alert("Employee delete failed:");
+                    console.log(err.responseJSON.Message);
+                });
+            };
+
+            self.updateUser = function () {
+                var deft = $.Deferred();
+                $.ajax({
+                    url: 'http://localhost:59797/api/Employee/udpadteObject',
+                    type: "PATCH",
+                    data: JSON.stringify(self.activeEmployee()),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function () {
+                        deft.resolve();
+                    },
+                    error: function () {
+                        deft.reject();
+                    }
+                });
+
+                return deft.promise();
+            }
+
+            self.updateUserAndGoBack = function () {
+                self.updateUser()
+                    .then(() => {
+                        $.getJSON("http://localhost:59797/Employees/getAll", function (data) {
+                            self.employeesList(data);
+                            alert("Record Updated Successfully");
+                            self.resetSlectedUser();
+                            self.showDelete();
+                        })
+                    }).catch(function () {
+                        alert("Failed");
+                    });
+            };
+
+            self.Tab = function (id, name) {
+                var self = this;
+                self.id = id;
+                self.name = name;
+                return self;
+            };
+
+            self.tabs = new Array();
+            self.tabs.push(new self.Tab(1, 'Home'));
+            self.tabs.push(new self.Tab(2, 'Get User'));
+            self.tabs.push(new self.Tab(3, 'Insert User'));
+            self.selectedTab = ko.observable(2);
+
+            self.employeeListTemplate = ko.computed(function () {
+                return {
+                    dataSource: self.employeesList(),
+                    visible: self.isInitialised(),
+                    displayExpr: 'firstName',
+                    fieldTemplate: 'field',
+                    value: self.activeEmployee,
+                    height: 30,
+                };
+            });
+
+            //u ovom slucaju noje pametno koristiti pureComputed, ovo se ne ucitava automatski, tako da  nece pratiti prome zaposlenog
+            // iz tog razloga bolje je koristiti computed u ovom slucaju koji stalno prati promene, a pure koristi kada treba nesto da se izracuna i vrati  podatake
+
+            //self.brojPure = 0;
+            //self.chageEmployeePure = ko.pureComputed(function () {
+            //    self.brojPure++;
+            //    self.activeEmployee();
+            //    self.changToEditableContent();
+            //    self.visibleSubmitEdit(false);
+            //    self.showUpdate();
+            //    console.log("pure: " + self.brojPure);
+            //    return self.brojPure;
+            //}, self);
+            var onActiveEmployeeChange = ko.computed(function () {
+                self.activeEmployee();
+                self.changToEditableContent();
+                self.visibleSubmitEdit(false);
+                self.showUpdate();
+            });
+
+            $.getJSON("http://localhost:59797/Employees/getAll", function (data) {
+                self.employeesList(data);
+            });
+
+            self.dispose = function () {
+                var a = 5;
+                onActiveEmployeeChange.dispose();
+            }
+        }
+        ko.applyBindings(new EmployeesViewModel());
+    </script>
+
+</body>
+</html>
